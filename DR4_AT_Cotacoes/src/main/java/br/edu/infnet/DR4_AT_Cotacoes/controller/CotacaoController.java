@@ -29,16 +29,8 @@ public class CotacaoController {
 	@PostMapping("/registraCotacoes")
 	Cotacao registra(Double preco, String keyword) {
 		produto = cotacaoService.search(keyword);
-		System.out.println("OI");
 		System.out.println(produto);
 		return cotacaoService.registra(preco, produto);
-	}
-	
-	@PostMapping("/ListaCotacoes")
-	public List<Cotacao> findList(String keyword) {
-		List<Cotacao> c = cotacaoService.findCotacoes(keyword);
-		System.out.println(c);
-		return cotacaoService.findCotacoes(keyword);
 	}
 	
 	@DeleteMapping("/deletaCotacao/{id}")
