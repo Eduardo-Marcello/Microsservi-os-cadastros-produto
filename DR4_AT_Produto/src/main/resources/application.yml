@@ -1,0 +1,5 @@
+amazonProperties: 
+  endpointUrl: https://s3.sa-east-1.amazonaws.com 
+  accessKey: AKIA6DYRUW5CNL6ZJN7F
+  secretKey: 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
+  bucketName: s3-infnet
