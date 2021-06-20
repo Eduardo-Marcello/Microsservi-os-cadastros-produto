@@ -33,10 +33,10 @@ public class Produto implements Serializable {
 	@Column(name = "classificacao")
 	private String classificacao;
 	
-	@OneToMany(mappedBy = "produto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "produto", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Cotacao> cotacoesLista;
-
-	public Set<Cotacao> getEmails() {
+	
+	public Set<Cotacao> getCotacoes() {
 		return cotacoesLista;
 	}
 

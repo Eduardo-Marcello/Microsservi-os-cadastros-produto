@@ -1,5 +1,6 @@
 package br.edu.infnet.DR4_AT_Produto.controller;
 
+import br.edu.infnet.DR4_AT_Produto.model.negocio.Csv;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import br.edu.infnet.DR4_AT_Produto.model.negocio.Produto;
 import br.edu.infnet.DR4_AT_Produto.model.service.AmazonClient;
 import br.edu.infnet.DR4_AT_Produto.model.service.ProdutoService;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import java.io.IOException;
 
 @RestController
 public class ProdutoController {
@@ -38,6 +42,18 @@ public class ProdutoController {
 	public List<Produto> listagemCotacoes(){
 		
 		return produtoService.findListagem();
+	}
+        
+        @PostMapping("/ExportarCotacoes")
+	public List<Csv> exportarArquivo(){
+		List<Produto> cotacoes = produtoService.findListagem();
+		
+		try {
+			return produtoService.exportarCotacoes(cotacoes);
+		} catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException | IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@DeleteMapping(value = "/deletaProduto/{id}")
