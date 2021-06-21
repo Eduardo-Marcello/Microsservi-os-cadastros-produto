@@ -39,14 +39,14 @@ public class ProdutoController {
 	}
 	
 	@PostMapping("/ListaCotacoes")
-	public List<Produto> listagemCotacoes(){
+	public Iterable<Produto> listagemCotacoes(){
 		
 		return produtoService.findListagem();
 	}
         
         @PostMapping("/ExportarCotacoes")
 	public List<Csv> exportarArquivo(){
-		List<Produto> cotacoes = produtoService.findListagem();
+		Iterable<Produto> cotacoes = produtoService.findListagem();
 		
 		try {
 			return produtoService.exportarCotacoes(cotacoes);

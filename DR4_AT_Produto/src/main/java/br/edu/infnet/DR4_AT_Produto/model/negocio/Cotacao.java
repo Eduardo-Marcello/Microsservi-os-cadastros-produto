@@ -33,9 +33,9 @@ public class Cotacao implements Serializable {
 		 
 	 }
 
-	public Cotacao(double preco, Produto produto) {
+	public Cotacao(Short id, double preco) {
+		this.id = id;
 		this.preco = preco;
-		this.produto = produto;
 	}
 
 	public Short getId() {

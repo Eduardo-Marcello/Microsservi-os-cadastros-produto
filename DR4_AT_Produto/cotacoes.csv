@@ -1,4 +1,4 @@
-"cotacoes","produto"
-"","Produtos [id=1, codigoProduto=1, nomeProduto=caneta, classificacao=escritorio]"
-"","Produtos [id=1, codigoProduto=1, nomeProduto=caneta, classificacao=escritorio]"
-"","Produtos [id=2, codigoProduto=2, nomeProduto=papel, classificacao=escritorio]"
+"idCotacao","idProduto","nomeProduto","preco"
+"1","1","caneta","2.1"
+"2","1","caneta","1.75"
+"3","2","papel","2.05"

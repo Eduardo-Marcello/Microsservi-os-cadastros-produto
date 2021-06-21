@@ -1,5 +1,6 @@
 package br.edu.infnet.DR4_AT_Produto.model.service;
 
+import br.edu.infnet.DR4_AT_Produto.model.negocio.Cotacao;
 import br.edu.infnet.DR4_AT_Produto.model.negocio.Csv;
 import java.util.List;
 
@@ -39,8 +40,10 @@ public class ProdutoService {
 			return pr.search(keyword);
 		}
 		
-		public List<Produto> findListagem(){
-			return pr.findCotacoes();
+		public Iterable<Produto> findListagem(){
+			Iterable<Produto> p = pr.findCotacoes();
+
+			return p;
 		}
 		
 		public Short findIdByKeyword(String keyword) {
@@ -51,11 +54,14 @@ public class ProdutoService {
 			this.pr.deleteById(id);
 		}
                 
-		public List<Csv> exportarCotacoes(List<Produto> cotacoes)
+		public List<Csv> exportarCotacoes(Iterable<Produto> cotacoes)
 			throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
 		List<Csv> cots = new ArrayList<>();
 		for (Produto p : cotacoes) {
-			cots.add(new Csv((p)));
+			Iterable<Cotacao> c = p.getCotacoes();
+			for(Cotacao cs: c) {
+				cots.add(new Csv(p.getIdProduto(), cs.getId(), p.getNomeProduto(), cs.getPreco()));
+			}
 		}
 		Writer writer = Files.newBufferedWriter(Paths.get("cotacoes.csv"));
 		StatefulBeanToCsv<Csv> beanToCsv = new StatefulBeanToCsvBuilder(writer).build();

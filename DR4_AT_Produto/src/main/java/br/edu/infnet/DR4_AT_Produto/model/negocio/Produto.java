@@ -1,6 +1,7 @@
 package br.edu.infnet.DR4_AT_Produto.model.negocio;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "produtos")
 @NamedQueries({
-	@NamedQuery(name = "Produto.findCotacoes", query = "SELECT p FROM Produto p JOIN FETCH p.cotacoesLista"),
+	@NamedQuery(name = "Produto.findCotacoes", query = "SELECT DISTINCT(p) FROM Produto p JOIN FETCH p.cotacoesLista"),
 })
 public class Produto implements Serializable {
 
@@ -33,10 +34,10 @@ public class Produto implements Serializable {
 	@Column(name = "classificacao")
 	private String classificacao;
 	
-	@OneToMany(mappedBy = "produto", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<Cotacao> cotacoesLista;
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+	private List<Cotacao> cotacoesLista;
 	
-	public Set<Cotacao> getCotacoes() {
+	public List<Cotacao> getCotacoes() {
 		return cotacoesLista;
 	}
 
